@@ -1,2 +1,2 @@
 # aruba_backup
-Script bash de sauvegarde pour les switches Aruba. CErtainement aussi pour les Cisco.
+Script bash de sauvegarde pour les switches Aruba. Certainement aussi pour les Cisco.
