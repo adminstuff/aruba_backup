@@ -1,9 +1,10 @@
-# aruba_backup
+# Aruba Backup
 Script bash de sauvegarde pour les switches Aruba. Certainement aussi pour les Cisco.
 Le script liste les switches et les comptes de connexion dans le fichier switches.txt.
 Il se connecte en ssh sur chaque switch et sauvegarde la running-config et la startup-config et les compresses
 
-## Fonctionnement : 
+## Fonctionnement
+
 - Sauvegarde automatique des configurations running et startup
 - Authentification sécurisée par clé SSH
 - Compression automatique des sauvegardes
@@ -12,6 +13,7 @@ Il se connecte en ssh sur chaque switch et sauvegarde la running-config et la st
 - Logging complet des opérations
 
 ## Pré requis sur le serveur de backup
+
 - Système Linux/Unix
 - Bash shell
 - OpenSSH client
@@ -22,19 +24,19 @@ Il se connecte en ssh sur chaque switch et sauvegarde la running-config et la st
 
 ## Installation
 
-### 1. Créer les répertoires nécessaires :
+### 1. Créer les répertoires nécessaires
 ```
 sudo mkdir -p /opt/scripts/network
-sudo mkdir -p /backup/aruba_cx
+sudo mkdir -p /backup/aruba
 ```
 
-### 2. Copier le script :
+### 2. Copier le script
 ```
 sudo cp backup_aruba.sh /opt/scripts/network/
 sudo chmod +x /opt/scripts/network/backup_aruba.sh
 ```
 
-### 3. Générer une paire de clés SSH :
+### 3. Générer une paire de clés SSH
 ```
 ssh-keygen -t ecdsa-sha2-nistp256 -f ~/.ssh/aruba_backup -C "backup-ops"
 chmod 0600 ~/.ssh/aruba_backup
@@ -53,7 +55,7 @@ switch2.domain.com:backup-user
 #switch3.domain.com:backup-user    # Commenté
 ```
 
-### 2. Configuration des Switches Aruba CX
+### 2. Configuration des Switches Aruba
 
 Sur chaque switch :
 ```
@@ -71,13 +73,13 @@ user backup-ops authorized-key ecdsa-sha2-nistp256 AAAA... backup-ops
 
 Principales variables à configurer dans le script :
 ```
-SCRIPT_DIR="/opt/scripts/network"     # Localisation du script
-BACKUP_BASE="/backup"                 # Base des sauvegardes
-ADMIN_EMAIL="admin@entreprise.com"    # Email pour les rapports
-CONFIG_FILE="${SCRIPT_DIR}/switches.txt"
-BACKUP_DIR="${BACKUP_BASE}/aruba"
-LOG_FILE="${BACKUP_DIR}/log/aruba_backup.log"
-SSH_KEY="${HOME}/.ssh/aruba_backup"
+SCRIPT_DIR="/opt/scripts/network"             # Localisation du script
+BACKUP_BASE="/backup"                         # Base des sauvegardes
+ADMIN_EMAIL="admin@entreprise.com"            # Email pour les rapports
+CONFIG_FILE="${SCRIPT_DIR}/switches.txt"      # Localisation du fichier de configuration
+BACKUP_DIR="${BACKUP_BASE}/aruba"             # Répertoire de sauvegarde
+LOG_FILE="${BACKUP_DIR}/log/aruba_backup.log" # Localisation du fichier de log
+SSH_KEY="${HOME}/.ssh/aruba_backup"           # Localisation de la clé privée
 ```
 
 
